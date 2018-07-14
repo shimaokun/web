@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Block vs Block</title>
+		<link rel="stylesheet" href="css/style.css"/>
+	</head>
+	<body>
+		<div>请用WASD键以及空格键，进行控制，W->旋转，A->左移,D->右移,S->下移，空格->坠落</div>
+		<div id="local" class="square">
+			<div class="title">游戏区域</div>
+			<div class="game" id="local_game"></div>
+			<div class="next" id="local_next"></div>
+			<div class="info">
+				<div>已用时：<span id="local_time">0</span>s</div>
+				<div>已得分：<span id="local_score">0</span>分</div>
+				<div id="local_gameover"></div>
+			</div>
+		</div>
+		<script src="js/square.js"></script>
+		<script src="js/squareFactory.js"></script>
+		<script src="js/game.js"></script>
+		<script src="js/local.js"></script>
+		<script src="js/remote.js"></script>
+		<script src="js/script.js"></script>
+	</body>
+</html>
