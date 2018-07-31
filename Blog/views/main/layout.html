@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/index.css">
+    <script src="/public/js/jquery.min.js"></script>
+    <script src="/public/js/index.js"></script>
+    <script type="text/javascript " src="/public/js/bootstrap.min.js "></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0;">
+        <div class="header-main">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mycollapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="logo img-responsive">
+                        <img src="/public/image/logo.jpg">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse menu" id="mycollapse">
+                    <ul class="nav navbar-nav">
+                        {%if category==''%}
+                        <li role="presentation"><a href="/"  class="focus">首页</a></li>
+                        {%else%}
+                        <li role="presentation"><a href="/">首页</a></li>
+                        {%endif%}
+                        {%for cate in categories%}
+                        {%if category==cate.id%}
+                        <li role="presentation"><a href="/?category={{cate.id}}"  class="focus">{{cate.name}}</a></li>
+                        {%else%}
+                        <li role="presentation"><a href="/?category={{cate.id}}"  >{{cate.name}}</a></li>
+                        {%endif%}
+                        {%endfor%}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section>
+        <!--轮播图-->
+        <div id="myCarousel" class="carousel slide desc">
+            <ol class="carousel-indicators  hidden-xs">
+                <li class="active" data-target="#myCarousel" data-slide-to="0"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active  backimg">
+                    <a href="#">
+                        <img src="/public/image/1.jpg">
+                    </a>
+                </div>
+                <div class="carousel-caption">
+                    <h2 class="text-muted"><strong>欢迎来到我的博客！</strong></h2>
+                    <p class="text-muted">在这里你可以分享学习前端知识！</p>
+                </div>
+                <div class="item backimg">
+                    <a href="#">
+                        <img src="/public/image/2.jpg">
+                    </a>
+                </div>
+                <div class="item backimg">
+                    <a href="#">
+                        <img src="/public/image/3.jpg">
+                    </a>
+                </div>
+            </div>
+            <!--指示图标-->
+            <a href="#myCarousel" data-slide="prev" class="carousel-control left  hidden-xs">
+                <span class="glyphicon glyphicon-chevron-left contorl-left"></span>
+            </a>
+            <a href="#myCarousel" data-slide="next" class="carousel-control right  hidden-xs">
+                <span class="glyphicon glyphicon-chevron-right contorl-right"></span>
+            </a>
+        </div>
+    </section>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="mainLeft col-md-7 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            {%block content%}{%endblock%}
+        </div>
+        <div class="mainRight col-md-4 col-sm-4 hidden-xs">
+            {% if userInfo._id %}
+            <div class="rightBox thumbnail" id="userInfo">
+                <div class="caption">
+                    <div class="title"><span>用户信息</span></div>
+                    <p><span class="colDark">{{userInfo.username}}</span></p>
+                    {% if userInfo.isAdmin %}
+                    <p><span class="colDark">你好，管理员！</span><a href="/admin">进入管理</a></p>
+                    {% else %}
+                    <p><span class="colDark">你好，欢迎光临我的博客</span></p>
+                    {% endif %}
+                    <p><span class="colDark"><a href="javascript:;" id="logout">退出</a></span></p>
+                </div>
+            </div>
+            {% else %}
+            <div class="rightBox thumbnail" id="loginBox">
+                <div class="caption">
+                    <div class="title"><h4>登录</h4></div>
+                        <div class="form-group">
+                            <div class="line"><span class="colDark control-label">用户名：</span><input class="form-control col" name="username" type="text"><em></em></div>
+                            <div class="line"><span class="colDark control-label">密码：</span><input class="form-control col" name="password" type="password"><em></em></div>
+                            <div class="line"><span class="colDark"></span><button class="btn btn-primary but">登录</button></div>
+                            <p class="textRight">还没注册？ <a href="javascript:;" class="colMint">马上注册</a></p>
+                            <p class="colWarning textCenter"></p>
+                        </div>
+                </div>
+            </div>
+            <div class="rightBox thumbnail" id="registerBox" style="display: none">
+                <div class="caption">
+                    <div class="title"><h4>注册</h4></div>
+                        <div class="form-group">
+                            <div class="line"><span class="colDark control-label">用户名：</span><input class="form-control col" name="username" type="text"><em></em></div>
+                            <div class="line"><span class="colDark control-label">密码：</span><input class="form-control col" name="password" type="password"><em></em></div>
+                            <div class="line"><span class="colDark control-label">确认：</span><input class="form-control col" name="repassword" type="password"><em></em></div>
+                            <div class="line"><span class="colDark"></span><button class="btn btn-primary but">注册</button></div>
+                            <p class="textRight">已有账号？ <a href="javascript:;" class="colMint">马上登录</a></p>
+                            <p class="colWarning textCenter"></p>
+                        </div>
+                 </div>
+            </div>
+            {%endif%}
+            <div class="rightBox thumbnail">
+                <div class="caption">
+                    <div class="title"><span>学习网站</span></div>
+                    <p><a class="studynet" href="https://www.imooc.com/">慕课网 -- 程序员的梦工厂</a></p>
+                    <p><a class="studynet" href="https://ke.qq.com/">腾讯课堂 -- 学习成就梦想</a></p>
+                    <p><a class="studynet" href="https://www.runoob.com/">菜鸟教程 -- 学的不仅是技术</a></p>
+                    <p><a class="studynet" href="http://www.jikexueyuan.com/">极客学院 -- 专业的IT教育平台</a></p>
+                    <p><a class="studynet" href="https://www.miaov.com/">妙味课堂 -- 在线视频学习网站</a></p>
+                    <p><a class="studynet" href="https://www.csdn.net/">CSDN -- 专业IT技术社区</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container-fluid footer-h">
+        <div class="container">
+                            <li class="footer-title">联系我们</li>
+                            <li class="footer-title">关注</li>
+                            <li class="footer-title email">Email：603489679@qq.com</li>
+            </div>
+            <div class="row footer-bottom">
+                <h3>前站：你的前端学习起始站</h3>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

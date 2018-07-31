@@ -1,0 +1,8 @@
+安装MongoDB
+启动cmd命令行，切换到：项目路径\MongoDB\Server\4.0\bin的目录下
+因为github不允许上传过大过多文件，所以需要解压缩:项目路径\Blog\db下的journal.rar文件和项目路径\Blog下的node_modules.rar
+输入：mongod --dbpath=项目路径\Blog\db --port=27017
+提示等待连接数据库，项目路径根据个人输入
+启动MongoDB Compass Community软件，点击连接数据库
+启动项目，提示数据库连接成功
+在浏览器输入：localhost:8888即可访问，默认管理员账号密码皆为：admin

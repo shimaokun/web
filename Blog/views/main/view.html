@@ -1,0 +1,43 @@
+{%extends 'layout.html'%}
+
+{%block content%}
+    <div class="listBox bg-success thumbnail">
+        <div class="caption">
+            <h1 class="tit">{{content.title}}</h1>
+            <p class="colDefault">
+                作者：<span class="colInfo">{{content.user.username}}</span>
+                时间：<span class="colInfo">{{content.addTime|date('Y-m-d H:i:s',-8*60)}}</span>
+                阅读：<span class="colInfo">{{content.views}}</span>
+                评论：<span class="colInfo">{{content.comments.length}}</span>
+            </p>
+            <dfn><p class="desc">{{content.content}}</p></dfn>
+        </div>
+    </div>
+    <div class="listBox message bg-success thumbnail">
+        <div class="caption">
+            <h3 class="textLeft"><strong>评论</strong><span class="em"> 一共有 <em id="messageCount">0</em>条评论</span></h3>
+            {% if userInfo._id %}
+            <p class="textLeft clear">
+                <textarea id="messageContent" cols="80" rows="5"></textarea>
+                <input id="contentId" type="hidden" value="{{content.id}}">
+                <button id="messageBtn" class="submit btn btn-primary but">提交</button>
+            </p>
+            {%else%}
+            <p class="bgDanger" style="line-height: 30px;">你还没登录，请先登录！</p>
+            {%endif%}
+            <div class="messageList"></div>
+            <div class="pager">
+                <ul class="clear">
+                    <li class="previous">
+                        <a href="">上一页</a>
+                    </li>
+                    <li></li>
+                    <li class="next">
+                        <a href="">下一页</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<script src="/public/js/comment.js"></script>
+{%endblock%}
